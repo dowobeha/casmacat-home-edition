@@ -20,7 +20,6 @@ else
   tar xzf thot-toy-fr-en.tgz
   rm thot-toy-fr-en.tgz
 
-  mkdir -p /opt/casmacat/engines/log
   echo "fr-en-upload-1" > /opt/casmacat/engines/deployed
   chown -R www-data:www-data /opt/casmacat/engines
 fi
