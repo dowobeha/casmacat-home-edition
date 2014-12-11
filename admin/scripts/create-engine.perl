@@ -28,8 +28,8 @@ print INFO "source = $F\n";
 print INFO "target = $E\n";
 print INFO "run = $RUN\n";
 print INFO "name = $NAME\n";
-print INFO "time_started = 1395900000\n";
-print INFO "time_done = 1395900000\n";
+print INFO "time_started = ".time()."\n";
+print INFO "time_done = ".time()."\n";
 print INFO "time_built = ".time()."\n";
 close(INFO);
 

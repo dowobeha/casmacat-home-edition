@@ -44,6 +44,8 @@ class uploadEngineController extends viewcontroller {
       $dir = "";
       $has_run_file = 0;
       $moses_ini = "";
+      $thot_ini = "";
+      $itp_conf = "";
       foreach ($output as $file) {
         if (!preg_match('/^([^\/]+)\/(.*)$/',$file,$match)) {
           $this->msg .= "<br>Bad file: ".$file;
@@ -61,13 +63,19 @@ class uploadEngineController extends viewcontroller {
           else if (preg_match('/^moses.*ini*/',$match[2])) {
             $moses_ini = $match[2];
           }
+          else if (preg_match('/^thot.*ini*/',$match[2])) {
+            $thot_ini = $match[2];
+          }
+          else if (preg_match('/^itp-server.conf/',$match[2])) {
+            $itp_conf = $match[2];
+          }
         }
       }
       if (! $has_run_file) {
         $this->msg .= "<br>No RUN file in engine.";
       }
-      if ($moses_ini == "") {
-        $this->msg .= "<br>No moses.ini file in engine.";
+      if ($moses_ini == "" && $thot_ini == "") {
+        $this->msg .= "<br>No moses.ini or thot.ini file in engine.";
       }
       if ($this->msg != "") {
         $this->msg = "Upload failed:".$this->msg;
@@ -99,7 +107,15 @@ class uploadEngineController extends viewcontroller {
       while(file_exists($stem.$id)) { $id++; }
       $engine_dir = $stem.$id;
       exec("mv /tmp/$dir $engine_dir");
-      $this->fixDirInFile("$engine_dir/$moses_ini","/opt/casmacat/engines/$dir",$engine_dir);
+      if ($moses_ini != "") {
+        $this->fixDirInFile("$engine_dir/$moses_ini","/opt/casmacat/engines/$dir",$engine_dir);
+      }
+      if ($thot_ini != "") {
+        $this->fixDirInFile("$engine_dir/$thot_ini","/opt/casmacat/engines/$dir",$engine_dir);
+        $this->fixDirInFile("$engine_dir/$itp_conf","/opt/casmacat/engines/$dir",$engine_dir);
+        $this->fixDirInFile("$engine_dir/lm/lm_desc","/opt/casmacat/engines/$dir",$engine_dir);
+        $this->fixDirInFile("$engine_dir/tm/tm_desc","/opt/casmacat/engines/$dir",$engine_dir);
+      }
       $this->fixDirInFile("$engine_dir/RUN","/opt/casmacat/engines/$dir",$engine_dir);
       $this->fixDirInFile("$engine_dir/RUN","LOGDIR/$dir","LOGDIR/$source_language-$target_language-upload-$id");
       $this->msg = "Successfully uploaded";

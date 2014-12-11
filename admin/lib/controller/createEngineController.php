@@ -17,7 +17,7 @@ class createEngineController extends viewcontroller {
           $thot = "-thot";
         }
       }
-      $createCmd = "scripts/create-engine$thot.perl -f ".$_GET["input-extension"]." -e ".$_GET["output-extension"]." -run ".$_GET["run"]." -name '".escapeshellarg($_GET["name"])."'";
+      $createCmd = "scripts/create-engine$thot.perl -f ".$_GET["input-extension"]." -e ".$_GET["output-extension"]." -run ".$_GET["run"]." -name ".escapeshellarg($_GET["name"]);
       exec($createCmd);
       $this->msg = $createCmd;
     }

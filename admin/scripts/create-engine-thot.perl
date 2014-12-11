@@ -28,8 +28,8 @@ print INFO "source = $F\n";
 print INFO "target = $E\n";
 print INFO "run = $RUN\n";
 print INFO "name = $NAME\n";
-print INFO "time_started = 1395900000\n";
-print INFO "time_done = 1395900000\n";
+print INFO "time_started = ".time()."\n";
+print INFO "time_done = ".time()."\n";
 print INFO "time_built = ".time()."\n";
 close(INFO);
 
@@ -53,46 +53,37 @@ while(<RE_USE>) {
 }
 close(RE_USE);
 
-#use Data::Dumper;
-#print Dumper($dir, \%STEP);
-
-# process ttable - old static phrase table
-#my $ttable = "$exp_dir/model/phrase-table.".$STEP{"TRAINING_build-ttable"}.".gz";
-#my $first_line = `zcat $ttable | head -1`;
-#my @FIELD = split(/ \|\|\| /,$first_line);
-#my @SCORE = split(/ /,$FIELD[2]);
-#my $nscores = scalar @SCORE;
-#$ttable =~ /\/([^\/]+).gz$/;
-#`/opt/moses/bin/processPhraseTableMin -in $ttable -out $dir/$1 -threads all -nscores $nscores`;
-
 # copy phrase table
-`cp -r $exp_dir/model/phrase-table-thot.$STEP{"TRAINING_thot-build-ttable"} $dir/tm`;
+`cp -r $exp_dir/tuning/thot.tuned.ini.$STEP{"TUNING_thot-tune"}/tm $dir`;
 
 # copy language model
-foreach (keys %STEP) {
-  if (/LM_(.+)_train/) {
-    `cp -r $exp_dir/lm/$1.lm.$STEP{$_} $dir/lm`;
-  }
-}
+`cp -r $exp_dir/tuning/thot.tuned.ini.$STEP{"TUNING_thot-tune"}/lm $dir`;
 
 # copy truecase model
 if (defined($STEP{"TRUECASER_train"})) {
   `cp $exp_dir/truecaser/truecase-model.$STEP{"TRUECASER_train"}.* $dir`;
 }
 
-# copy configuration file
-my $config_dir = "$exp_dir/tuning/thot.tuned.ini.".$STEP{"TUNING_thot-tune"};
-my $config = "$config_dir/tuned_for_dev.cfg";
-open(CONFIG,$config);
-open(OUT,">$dir/thot.tuned.ini.".$STEP{"TUNING_thot-tune"});
-while(<CONFIG>) {
-  s/$config_dir/$dir/;
-  print OUT $_;
-}
-close(OUT);
-close(CONFIG);
 
-open(OUT,">$dir/itp-server.conf.".$STEP{"TUNING_thot-tune"});
+# copy and adjust paths in configuration files
+my $tune_dir = "$exp_dir/tuning/thot.tuned.ini.".$STEP{"TUNING_thot-tune"};
+
+my %CONFIG = ("$tune_dir/tuned_for_dev.cfg" => "$dir/thot.tuned.ini",
+              "$tune_dir/lm/lm_desc"        => "$dir/lm/lm_desc",
+              "$tune_dir/tm/tm_desc"        => "$dir/tm/tm_desc");
+
+foreach my $file (keys %CONFIG) {
+  my @FILE = `cat $file` || die($file);
+  open(OUT,">".$CONFIG{$file});
+  foreach (@FILE) {
+    s/$tune_dir/$dir/g;
+    print OUT $_;
+  }
+  close(OUT);
+}
+
+# create itp server configuration file
+open(OUT,">$dir/itp-server.conf");
 print OUT <<"END_OF_FILE";
 {
   "server": {
@@ -106,7 +97,7 @@ print OUT <<"END_OF_FILE";
     "id": "ITP",
     "module": "/opt/thot/lib/libthot_casmacat.so", 
     "name": "thot_imt_plugin",
-    "parameters": "-c $dir/thot.tuned.ini.$STEP{"TUNING_thot-tune"}",
+    "parameters": "-c $dir/thot.tuned.ini",
     "online-learning": true
   },
   "aligner": {
@@ -136,7 +127,6 @@ print OUT <<"END_OF_FILE";
 END_OF_FILE
 close(OUT);
 
-
 # create run file
 open(RUN,">$dir/RUN");
 print RUN <<"END_OF_FILE";
@@ -152,15 +142,14 @@ mkdir -p \$LOGDIR
 killall -9 mosesserver
 killall -9 online-mgiza
 killall -9 symal
-kill -9 `ps -eo pid,cmd -C python | grep 'python /opt/casmacat/mt-server/python_server/server.py' | grep -v grep | 
-cut -c1-5`
+kill -9 `ps -eo pid,cmd -C python | grep 'python /opt/casmacat/mt-server/python_server/server.py' | grep -v grep | cut -c1-5`
 
 kill -9 `ps -eo pid,cmd -C python | grep 'python /opt/casmacat/itp-server/server/casmacat-server.py' | grep -v grep | cut -c1-5`
 
 if test "\$1" != "stop"; then 
   export PYTHONPATH=/opt/casmacat/itp-server/src/lib:/opt/casmacat/itp-server/src/python:\$PYTHONPATH 
   export LD_LIBRARY_PATH=/opt/casmacat/itp-server/src/lib/.libs 
-  /opt/casmacat/itp-server/server/casmacat-server.py -c $dir/itp-server.conf.$STEP{"TUNING_thot-tune"} \$2 \\
+  /opt/casmacat/itp-server/server/casmacat-server.py -c $dir/itp-server.conf \$2 \\
     >  \$LOGDIR/$engine.thot.stdout \\
     2> \$LOGDIR/$engine.thot.stderr &
 fi
