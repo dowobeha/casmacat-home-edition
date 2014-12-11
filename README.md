@@ -1,9 +1,9 @@
-CASMACAT Installer
-==================
+CASMACAT Home Edition Installer
+===============================
 
 Note: early beta, try at yor own risk.
 
-Installs CASMACAT workbench with Moses backend on Ubuntu.
+Installs CASMACAT Home Edition on Ubuntu 14.04.
 Works on any operationg system (Windows, MacOS), when installed
 within a virtual machine.
 
