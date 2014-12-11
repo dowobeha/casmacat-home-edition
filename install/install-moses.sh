@@ -6,7 +6,7 @@ then
   cd /opt/moses
   git pull
 else
-  git clone https://github.com/moses-smt/mosesdecoder.git /opt/moses
+  git clone git://github.com/moses-smt/mosesdecoder.git /opt/moses
 fi
 
 # GIZA
@@ -29,14 +29,17 @@ echo 'STEP 3/7: installing mgiza '`date +%s`
 if [ -e /opt/moses/external/bin/mgiza ]
 then
   echo 'mgiza already installed'
-  #cd /opt/moses/external/mgiza
-  #svn up
+  cd /opt/moses/external/mgiza
+  git pull
 else
   cd /opt/moses/external
-  svn checkout svn://svn.code.sf.net/p/mgizapp/code/trunk mgiza
-  cd /opt/moses/external/mgiza/mgizapp
-  /opt/casmacat/install/compile-mgiza.sh
+  git clone git://github.com/moses-smt/mgiza.git
 fi
+cd /opt/moses/external/mgiza/mgizapp
+cmake .
+make
+cp bin/mgiza /opt/moses/external/bin
+cp scripts/merge_alignment.py /opt/moses/external/bin
 
 # online mGIZA
 echo 'STEP 4/7: installing online mgiza '`date +%s`
@@ -60,7 +63,7 @@ then
   cd /opt/moses/external/fast-align
   git pull
 else
-  git clone https://github.com/clab/fast_align.git /opt/moses/external/fast-align
+  git clone git://github.com/clab/fast_align.git /opt/moses/external/fast-align
 fi
 cd /opt/moses/external/fast-align
 make

@@ -8,7 +8,7 @@ then
   git checkout casmacat
 else
   cd /opt/casmacat
-  git clone git://git.assembla.com/matecat_source.git web-server
+  git clone git://github.com/casmacat/casmacat-frontend.git web-server
   cd web-server
   git checkout casmacat
   mkdir downloads
@@ -54,7 +54,7 @@ then
   git pull
 else
   cd /opt/casmacat
-  git clone git://github.com/hsamand/casmacat-cat-server.git cat-server
+  git clone git://github.com/casmacat/moses-cat-server.git cat-server
 fi
 
 cd /opt/casmacat/cat-server
@@ -78,7 +78,7 @@ then
   git pull
 else
   cd /opt/casmacat
-  git clone git://github.com/christianbuck/matecat_util.git mt-server
+  git clone git://github.com/casmacat/moses-mt-server.git mt-server
 fi
 chown -R www-data:www-data /opt/casmacat/mt-server
 

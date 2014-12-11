@@ -8,7 +8,7 @@ then
   git pull
 else
   cd /opt/casmacat
-  git clone git://github.com/valabau/itp-server.git itp-server
+  git clone git://github.com/casmacat/casmacat-thot-server.git itp-server
   cd /opt/casmacat/itp-server
   bash autogen.sh
   ./configure
