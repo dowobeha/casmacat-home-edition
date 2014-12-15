@@ -9,15 +9,12 @@ then
 else
   cd /opt/casmacat
   git clone git://github.com/casmacat/casmacat-thot-server.git itp-server
-  cd /opt/casmacat/itp-server
-  bash autogen.sh
-  ./configure
 fi
-
-chown -R www-data:www-data /opt/casmacat/itp-server
 
 echo 'STEP 2/2: downloading and installing cat server '`date +%s`
 cd /opt/casmacat/itp-server
+bash autogen.sh
+./configure
 make
 ln -sf /opt/casmacat/itp-server/src/lib/.libs/_casmacat.so /opt/casmacat/itp-server/server/_casmacat.so
 echo 'PYTHONPATH=/opt/casmacat/itp-server/src/lib:/opt/casmacat/itp-server/src/python:$PYTHONPATH LD_LIBRARY_PATH=/opt/casmacat/itp-server/src/lib/.libs /opt/casmacat/itp-server/server/casmacat-server.py -c $1 $2' > /opt/casmacat/admin/scripts/itp-server.sh
@@ -31,6 +28,8 @@ echo 'PYTHONPATH=/opt/casmacat/itp-server/src/lib:/opt/casmacat/itp-server/src/p
 #  sed -i -re 's#<PLUGINS>#/opt/casmacat/itp-server/src/lib/.libs#g' /opt/casmacat/engines/eutt2-demo/eutt2-es-en{,-thot}.cfg
 #  sed -i -re 's#<THOT>#/opt/thot#g' /opt/casmacat/engines/eutt2-demo/eutt2-es-en{,-thot}.cfg
 #fi
+
+chown -R www-data:www-data /opt/casmacat/itp-server
 
 echo 'DONE '`date +%s`
 
