@@ -60,8 +60,8 @@ class indexController extends viewcontroller {
         if (strpos($line,"/opt/casmacat/mt-server/python_server/server.py") !== false) {
           $this->mt_server_online++;
         }
-        if (strpos($line,"/opt/casmacat/itp-server/server/casmacat-server.py") !== false && strpos($line,"8765") !== false) {
-          $this->mt_server_online++;
+        if (strpos($line,"/opt/casmacat/itp-server/server/casmacat-server.py") !== false) {
+          $this->mt_server_online = 2;
         }
       }
     }
