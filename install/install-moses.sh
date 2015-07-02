@@ -10,19 +10,19 @@ else
 fi
 
 # GIZA
-echo 'STEP 2/7: installing giza '`date +%s`
-if [ -d /opt/moses/external/giza-pp ]
-then
-  cd /opt/moses/external/giza-pp
-  svn up
-else
-  svn checkout http://giza-pp.googlecode.com/svn/trunk/ /opt/moses/external/giza-pp
-fi
-cd /opt/moses/external/giza-pp
-make
-mkdir -p /opt/moses/external/bin
-cp /opt/moses/external/giza-pp/GIZA++-v2/GIZA++ /opt/moses/external/giza-pp/GIZA++-v2/snt2cooc.out /opt/moses/external/giza-pp/GIZA++-v2/snt2plain.out /opt/moses/external/bin
-cp /opt/moses/external/giza-pp/mkcls-v2/mkcls /opt/moses/external/bin
+#echo 'STEP 2/7: installing giza '`date +%s`
+#if [ -d /opt/moses/external/giza-pp ]
+#then
+#  cd /opt/moses/external/giza-pp
+#  svn up
+#else
+#  svn checkout http://giza-pp.googlecode.com/svn/trunk/ /opt/moses/external/giza-pp
+#fi
+#cd /opt/moses/external/giza-pp
+#make
+#mkdir -p /opt/moses/external/bin
+#cp /opt/moses/external/giza-pp/GIZA++-v2/GIZA++ /opt/moses/external/giza-pp/GIZA++-v2/snt2cooc.out /opt/moses/external/giza-pp/GIZA++-v2/snt2plain.out /opt/moses/external/bin
+#cp /opt/moses/external/giza-pp/mkcls-v2/mkcls /opt/moses/external/bin
 
 # mGIZA
 echo 'STEP 3/7: installing mgiza '`date +%s`
@@ -38,6 +38,7 @@ fi
 cd /opt/moses/external/mgiza/mgizapp
 cmake .
 make
+cp bin/mkcls /opt/moses/external/bin
 cp bin/mgiza /opt/moses/external/bin
 cp scripts/merge_alignment.py /opt/moses/external/bin
 
