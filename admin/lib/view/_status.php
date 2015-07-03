@@ -44,6 +44,7 @@
 <?php
   $deployed = file("/opt/casmacat/engines/deployed");
   if (isset($deployed[0])) {
+    $thot = 0;
     if ($handle = opendir("/opt/casmacat/engines/".rtrim($deployed[0]))) {
       while (false !== ($file = readdir($handle))) {
         if (preg_match("/^thot/",$file,$match)) {

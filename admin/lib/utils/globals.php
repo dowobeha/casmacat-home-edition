@@ -10,6 +10,7 @@
                      "fi" => "Finnish",
                      "it" => "Italian",
                      "fr" => "French",
+                     "ps" => "Pashto",
                      "pt" => "Portuguese",
                      "es" => "Spanish",
                      "sv" => "Swedish" );

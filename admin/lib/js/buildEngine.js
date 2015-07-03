@@ -1,4 +1,3 @@
-// change of language pair
 
 var currentInputExtension = "";
 var currentOutputExtension = "";
@@ -39,7 +38,7 @@ function ajaxFileUpload() {
   $("#loading").ajaxStart(function(){ $(this).show(); })
 	       .ajaxComplete(function(){ $(this).hide(); });
   $.ajaxFileUpload({
-	url:'/?action=buildEngine&do=upload&input-extension=fr&output-extension=en',
+	url:'/?action=buildEngine&do=upload&input-extension='+currentInputExtension+'&output-extension='+currentOutputExtension,
 	secureuri:false,
 	fileElementId:'fileToUpload',
 	dataType: 'xml',
