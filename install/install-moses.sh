@@ -38,7 +38,7 @@ fi
 cd /opt/moses/external/mgiza/mgizapp
 cmake .
 make
-cp bin/mkcls /opt/moses/external/bin
+cp bin/mkcls bin/snt2cooc /opt/moses/external/bin
 cp bin/mgiza /opt/moses/external/bin
 cp scripts/merge_alignment.py /opt/moses/external/bin
 
