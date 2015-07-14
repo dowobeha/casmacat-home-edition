@@ -102,7 +102,7 @@ class listController extends viewcontroller {
 
     private function resume($run) {
       chdir("/opt/casmacat/experiment/".$_GET["lp"]);
-      putenv("USER=www-data"); // reqired by mgiza
+      //putenv("USER=".get_current_user()); // reqired by mgiza
       $prepCmd .= "rm -f steps/$run/stopped.$run";
       $prepCmd .= " ; /opt/moses/scripts/ems/experiment.perl -delete-crashed $run -no-graph -exec";
       $prepCmd .= " ; touch steps/$run/running.$run";

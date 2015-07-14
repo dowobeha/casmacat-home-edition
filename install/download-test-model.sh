@@ -21,6 +21,6 @@ else
   rm thot-toy-fr-en.tgz
 
   echo "fr-en-upload-1" > /opt/casmacat/engines/deployed
-  chown -R www-data:www-data /opt/casmacat/engines
+  chown -R $(logname):$(logname) /opt/casmacat/engines
 fi
 echo 'DONE '`date +%s`

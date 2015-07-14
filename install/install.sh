@@ -10,7 +10,7 @@ mkdir -p $LOGDIR
 
 
 sh ./install-dependencies.sh > $LOGDIR/dependencies.out 2> $LOGDIR/dependencies.err
-chown -R www-data:www-data /opt/casmacat
+chown -R $(logname):$(logname) /opt/casmacat
 sh ./setup-admin.sh > $LOGDIR/admin.out 2> $LOGDIR/admin.err &
 sh ./install-dependencies2.sh >> $LOGDIR/dependencies.out 2>> $LOGDIR/dependencies.err
 

@@ -279,7 +279,9 @@ alignment-symmetrization-method = grow-diag-final-and
 
 ### use of Chris Dyer's fast align for word alignment
 #
-#fast-align-settings = "-d -o -v"
+fast-align-settings = "-d -o -v -t -5"
+fast-align-save-model = yes
+fast-align-max-lines = 100000
 
 ### use of berkeley aligner for word alignment
 #

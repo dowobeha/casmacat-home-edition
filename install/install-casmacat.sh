@@ -34,14 +34,14 @@ echo 'STEP 3/6: configure web server '`date +%s`
 # apache config
 echo 'STEP 4/6: configure apache mysql '`date +%s`
 cp /opt/casmacat/install/apache-setup/casmacat.conf /etc/apache2/sites-available
-chown www-data:www-data /etc/apache2/sites-available/casmacat.conf
+chown $(logname):$(logname) /etc/apache2/sites-available/casmacat.conf
 cd /etc/apache2/sites-enabled
 if [ ! -e casmacat.conf ]
 then
   ln -s ../sites-available/casmacat.conf .
   cd /etc/apache2/mods-enabled
   ln -s ../mods-available/rewrite.load .
-  chown -R www-data:www-data /opt/casmacat/web-server
+  chown -R $(logname):$(logname) /opt/casmacat/web-server
   apache2ctl restart
 fi
 
@@ -68,7 +68,7 @@ then
   python setup.py install
 fi
 
-chown -R www-data:www-data /opt/casmacat/cat-server
+chown -R $(logname):$(logname) /opt/casmacat/cat-server
 
 # Install MT Server
 echo 'STEP 6/6: downloading and installing mt server '`date +%s`
@@ -80,7 +80,7 @@ else
   cd /opt/casmacat
   git clone git://github.com/casmacat/moses-mt-server.git mt-server
 fi
-chown -R www-data:www-data /opt/casmacat/mt-server
+chown -R $(logname):$(logname) /opt/casmacat/mt-server
 
 echo 'DONE '`date +%s`
 

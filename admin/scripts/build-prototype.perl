@@ -4,7 +4,8 @@ $|=1;
 
 use strict;
 use Getopt::Long "GetOptions";
-$ENV{"USER"} = "www-data"; # needed by mgiza
+#$ENV{"USER"} = `logname`; # needed by mgiza
+#chop($ENV{"USER"});
 
 my $dir = "/opt/casmacat/admin/scripts";
 

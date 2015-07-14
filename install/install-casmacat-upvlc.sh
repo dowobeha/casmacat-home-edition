@@ -29,7 +29,7 @@ echo 'PYTHONPATH=/opt/casmacat/itp-server/src/lib:/opt/casmacat/itp-server/src/p
 #  sed -i -re 's#<THOT>#/opt/thot#g' /opt/casmacat/engines/eutt2-demo/eutt2-es-en{,-thot}.cfg
 #fi
 
-chown -R www-data:www-data /opt/casmacat/itp-server
+chown -R $(logname):$(logname) /opt/casmacat/itp-server
 
 echo 'DONE '`date +%s`
 

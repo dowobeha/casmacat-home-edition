@@ -8,18 +8,17 @@ then
   ln -s ../sites-available/casmacat-admin.conf .
   rm 000-default.conf
 fi
-chown -R www-data:www-data /opt/casmacat/admin
+echo "export APACHE_RUN_USER=$(logname)" >> /etc/apache2/envvars
+echo "export APACHE_RUN_GROUP=$(logname)" >> /etc/apache2/envvars
 mkdir /opt/casmacat/data
 mkdir /opt/casmacat/experiment
 mkdir -p /opt/casmacat/log/web
-chown -R www-data:www-data /opt/casmacat/data
-chown -R www-data:www-data /opt/casmacat/experiment
-chown -R www-data:www-data /opt/casmacat/log
+chown -R $(logname):$(logname) /opt/casmacat
 
 echo 'STEP 2/2: restarting apache '`date +%s`
 service apache2 restart
 
-if [ $USER != 'www-data' ] 
+if [ $USER != $(logname) ] 
 then
   killall -9 firefox
   firefox http://localhost/ &

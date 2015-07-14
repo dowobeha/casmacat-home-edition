@@ -31,6 +31,9 @@ apt-get -yq install imagemagick graphviz
 # Perl library needed for NIST BLEU
 /opt/casmacat/install/cpanm XML::Twig
 
+# dependecies for fast_align
+apt-get -yq install libeigen3-dev liblzma-dev flex
+
 # needed for thot / itp server
 echo 'STEP 8/9: installing software for thot '`date +%s`
 apt-get -yq install libtool pkg-config autoconf-archive swig python-dev libperl-dev
