@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+
 export LOGDIR=/opt/casmacat/log/install/initial
 INSTALL_MOSES=yes
 INSTALL_THOT=yes
@@ -10,7 +12,7 @@ mkdir -p $LOGDIR
 
 
 sh ./install-dependencies.sh > $LOGDIR/dependencies.out 2> $LOGDIR/dependencies.err
-chown -R $(logname):$(logname) /opt/casmacat
+chown -R $user:$user /opt/casmacat
 sh ./setup-admin.sh > $LOGDIR/admin.out 2> $LOGDIR/admin.err &
 sh ./install-dependencies2.sh >> $LOGDIR/dependencies.out 2>> $LOGDIR/dependencies.err
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+
 echo 'STEP 1/6: installing web server '`date +%s`
 if [ -d /opt/casmacat/web-server ]
 then
@@ -34,14 +36,14 @@ echo 'STEP 3/6: configure web server '`date +%s`
 # apache config
 echo 'STEP 4/6: configure apache mysql '`date +%s`
 cp /opt/casmacat/install/apache-setup/casmacat.conf /etc/apache2/sites-available
-chown $(logname):$(logname) /etc/apache2/sites-available/casmacat.conf
+chown $user:$user /etc/apache2/sites-available/casmacat.conf
 cd /etc/apache2/sites-enabled
 if [ ! -e casmacat.conf ]
 then
   ln -s ../sites-available/casmacat.conf .
   cd /etc/apache2/mods-enabled
   ln -s ../mods-available/rewrite.load .
-  chown -R $(logname):$(logname) /opt/casmacat/web-server
+  chown -R $user:$user /opt/casmacat/web-server
   apache2ctl restart
 fi
 
@@ -68,7 +70,7 @@ then
   python setup.py install
 fi
 
-chown -R $(logname):$(logname) /opt/casmacat/cat-server
+chown -R $user:$user /opt/casmacat/cat-server
 
 # Install MT Server
 echo 'STEP 6/6: downloading and installing mt server '`date +%s`
@@ -80,7 +82,7 @@ else
   cd /opt/casmacat
   git clone git://github.com/casmacat/moses-mt-server.git mt-server
 fi
-chown -R $(logname):$(logname) /opt/casmacat/mt-server
+chown -R $user:$user /opt/casmacat/mt-server
 
 echo 'DONE '`date +%s`
 

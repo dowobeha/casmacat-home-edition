@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+
 mkdir -p /opt/casmacat/engines
 
 echo 'STEP 1/1: downloading '`date +%s`
@@ -21,6 +23,6 @@ else
   rm thot-toy-fr-en.tgz
 
   echo "fr-en-upload-1" > /opt/casmacat/engines/deployed
-  chown -R $(logname):$(logname) /opt/casmacat/engines
+  chown -R $user:$user /opt/casmacat/engines
 fi
 echo 'DONE '`date +%s`

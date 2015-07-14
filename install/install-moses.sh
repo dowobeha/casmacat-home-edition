@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+
 echo 'STEP 1/7: downloading moses '`date +%s`
 if [ -d /opt/moses ]
 then
@@ -75,7 +77,7 @@ cp /opt/moses/external/cdec/word-aligner/fast_align /opt/moses/external/bin
 echo 'STEP 6/7: compiling moses (may take a while) '`date +%s`
 cd /opt/moses
 ./bjam -j4 --with-xmlrpc-c=/usr --with-cmph=/usr --toolset=gcc --with-giza=/opt/moses/external/bin --with-tcmalloc=/usr --with-mm
-chown -R $(logname):$(logname) /opt/moses
+chown -R $user:$user /opt/moses
 
 # Experiment Web Interface
 echo 'STEP 7/7: setting up experiment inspection '`date +%s`
@@ -90,6 +92,6 @@ else
   touch /opt/casmacat/admin/inspect/setup
 fi
 cp -p /opt/moses/bin/biconcor /opt/casmacat/admin/inspect
-chown -R $(logname):$(logname) /opt/casmacat/admin/inspect
+chown -R $user:$user /opt/casmacat/admin/inspect
 echo 'DONE '`date +%s`
 

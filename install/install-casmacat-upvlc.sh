@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
+
 # Install UPVLC CAT Server
 echo 'STEP 1/2: downloading and installing cat server '`date +%s`
 if [ -d /opt/casmacat/itp-server ]
@@ -29,7 +31,7 @@ echo 'PYTHONPATH=/opt/casmacat/itp-server/src/lib:/opt/casmacat/itp-server/src/p
 #  sed -i -re 's#<THOT>#/opt/thot#g' /opt/casmacat/engines/eutt2-demo/eutt2-es-en{,-thot}.cfg
 #fi
 
-chown -R $(logname):$(logname) /opt/casmacat/itp-server
+chown -R $user:$user /opt/casmacat/itp-server
 
 echo 'DONE '`date +%s`
 
