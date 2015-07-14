@@ -33,7 +33,7 @@ external-bin-dir = /opt/moses/external/bin
 # srilm
 #srilm-dir = $moses-src-dir/srilm/bin/i686
 # irstlm
-irstlm-dir = $moses-src-dir/external/irstlm/bin
+#irstlm-dir = $moses-src-dir/external/irstlm/bin
 #
 # randlm
 #randlm-dir = $moses-src-dir/randlm/bin
