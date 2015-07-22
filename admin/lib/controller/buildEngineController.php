@@ -41,6 +41,8 @@ class buildEngineController extends viewcontroller {
     }
 
     public function uploadCorpus() {
+        $msg = "";
+        $error = "";
 	$fileElementName = 'fileToUpload';
 	if(!empty($_FILES[$fileElementName]['error'])) {
 	  switch($_FILES[$fileElementName]['error']) {
@@ -76,7 +78,9 @@ class buildEngineController extends viewcontroller {
 	  $msg .= " File Name: " . $_FILES['fileToUpload']['name'] . ", ";
 	  $msg .= " File Size: " . @filesize($_FILES['fileToUpload']['tmp_name']);
           $name = $_FILES['fileToUpload']['name'];
-          $processCmd = "scripts/process-xliff.perl -f ".$_GET["input-extension"]." -e ".$_GET["output-extension"]." -tmp ".$_FILES["fileToUpload"]["tmp_name"]." '$name'";
+          $name = preg_replace("/'/","\"",$name);  
+          $name = preg_replace("/.xliff\$/","",$name);  
+          $processCmd = "scripts/process-xliff.perl -f ".$_GET["input-extension"]." -e ".$_GET["output-extension"]." -tmp ".$_FILES["fileToUpload"]["tmp_name"]." -name '$name'";
           // $msg .= ", Command: " . $processCmd;
 	  exec($processCmd);
 	//for security reason, we force to remove all uploaded file
