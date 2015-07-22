@@ -135,7 +135,7 @@ order = 4
 #lm-binarizer = $irstlm-dir/compile-lm
 
 # kenlm, also set type to 8
-<MOSES>lm-binarizer = "$moses-bin-dir/build_binar trie -q 8 -b 8 -a 22"
+<MOSES>lm-binarizer = "$moses-bin-dir/build_binary trie -q 8 -b 8 -a 22"
 <MOSES>type = 8
 
 ### script to create quantized language model format (irstlm)
