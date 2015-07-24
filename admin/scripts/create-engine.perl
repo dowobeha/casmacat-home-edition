@@ -140,7 +140,7 @@ kill -9 `ps -eo pid,cmd -C python | grep 'python /opt/casmacat/mt-server/python_
   -tgt-tokenizer \"\$SCRIPTDIR/tokenizer/tokenizer.perl -b -a -l $E\ -protected \$SCRIPTDIR/tokenizer/basic-protected-patterns\" \\
   -tgt-truecaser \"\$SCRIPTDIR/recaser/truecase.perl -b -model $dir/truecase-model.".$STEP{"TRUECASER_train"}.".$E\" \\
   -tgt-prepro \"\$SCRIPTDIR/tokenizer/normalize-punctuation.perl -b -l $E\" \\
-  -fast-align \"/opt/moses/external/cdec/word-aligner/force_align.py \${S2TMODEL}.parameters \${S2TMODEL}.log \${T2SMODEL}.parameters \${T2SMODEL}.log\" \\
+  -fast-align \"/opt/moses/external/bin/force_align.py \${S2TMODEL}.parameters \${S2TMODEL}.log \${T2SMODEL}.parameters \${T2SMODEL}.log\" \\
   -persist \\
   -nthreads 4 \\
   -ip 127.0.0.1 \\

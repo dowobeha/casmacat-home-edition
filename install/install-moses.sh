@@ -11,7 +11,7 @@ else
   git clone git://github.com/moses-smt/mosesdecoder.git /opt/moses
 fi
 
-# mGIZA
+# mGIZA -- should be removed soon
 echo 'STEP 2/7: installing mgiza '`date +%s`
 if [ -e /opt/moses/external/bin/mgiza ]
 then
@@ -30,7 +30,7 @@ cp bin/mkcls bin/snt2cooc /opt/moses/external/bin
 cp bin/mgiza /opt/moses/external/bin
 cp scripts/merge_alignment.py /opt/moses/external/bin
 
-# online mGIZA
+# online mGIZA -- should be removed soon
 echo 'STEP 3/7: installing online mgiza '`date +%s`
 if [ -e /opt/moses/external/bin/online-mgiza ]
 then
@@ -46,32 +46,34 @@ else
 fi
 
 # Fast Align
-#echo 'STEP 4/7: installing fast-align '`date +%s`
-#if [ -d /opt/moses/external/fast-align ]
-#then
-#  cd /opt/moses/external/fast-align
-#  git pull
-#else
-#  git clone git://github.com/clab/fast_align.git /opt/moses/external/fast-align
-#fi
-#cd /opt/moses/external/fast-align
-#make
-#cp /opt/moses/external/fast-align/fast_align /opt/moses/external/bin
-
+echo 'STEP 4/7: installing fast-align '`date +%s`
+if [ -d /opt/moses/external/fast-align ]
+then
+  cd /opt/moses/external/fast-align
+  git pull
+  rm -rf /opt/moses/external/fast-align/build/*
+else
+  git clone git://github.com/clab/fast_align.git /opt/moses/external/fast-align
+  mkdir /opt/moses/external/fast-align/build
+fi
+cd /opt/moses/external/fast-align/build
+cmake ..
+make
+cp fast_align atools force_align.py /opt/moses/external/bin
 
 # incremental Fast Align
-echo 'STEP 5/7: installing incremental fast-align (may take a while) '`date +%s`
-if [ -d /opt/moses/external/cdec ]
-then
-  cd /opt/moses/external/cdec
-  git pull
-else
-  git clone git://github.com/redpony/cdec.git /opt/moses/external/cdec
-fi
-cd /opt/moses/external/cdec
-cmake CMakeLists.txt
-make
-cp /opt/moses/external/cdec/word-aligner/fast_align /opt/moses/external/bin
+#echo 'STEP 5/7: installing incremental fast-align (may take a while) '`date +%s`
+#if [ -d /opt/moses/external/cdec ]
+#then
+#  cd /opt/moses/external/cdec
+#  git pull
+#else
+#  git clone git://github.com/redpony/cdec.git /opt/moses/external/cdec
+#fi
+#cd /opt/moses/external/cdec
+#cmake CMakeLists.txt
+#make
+#cp /opt/moses/external/cdec/word-aligner/fast_align /opt/moses/external/bin
 
 # Moses
 echo 'STEP 6/7: compiling moses (may take a while) '`date +%s`
