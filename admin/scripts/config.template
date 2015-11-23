@@ -245,7 +245,7 @@ script = $moses-script-dir/training/train-model.perl
 # * "-sort-buffer-size 8G -sort-compress gzip" to reduce on-disk sorting
 # * "-sort-parallel 8 -cores 8" to speed up phrase table building
 #
-training-options = "--sort-compress gzip --sort-buffer-size 1G -mgiza -mgiza-cpus 1 -giza-option 'nodumps=0 onlyaldumps=0 model1dumpfrequency=0 hmmdumpfrequency=5'"
+training-options = "--sort-compress gzip --sort-buffer-size 1G --lexical-reordering-default-scores=0.4,0.2,0.2,0.2,0.4,0.2,0.2,0.2"
 
 ### factored training: specify here which factors used
 # if none specified, single factor training is assumed
@@ -349,7 +349,7 @@ binarize-all = $moses-script-dir/training/binarize-model.perl
 ### lexicalized reordering: specify orientation type
 # (default: only distance-based reordering model)
 #
-lexicalized-reordering = msd-bidirectional-fe
+lexicalized-reordering = hier-mslr-bidirectional-fe
 
 ### hierarchical rule set
 #

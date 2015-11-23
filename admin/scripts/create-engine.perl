@@ -56,9 +56,6 @@ close(RE_USE);
 # copy phrase table (memory mapped suffix array)
 `cp -r $exp_dir/model/phrase-table-mmsapt.$STEP{"TRAINING_build-mmsapt"} $dir`;
 
-# copy reordering table
-`cp $exp_dir/model/moses.bin.ini.$STEP{"TRAINING_create-config"}.tables/reordering-table.$STEP{"TRAINING_build-reordering"}.wbe-msd-bidirectional-fe.minlexr $dir`;
-
 # copy language model
 if (defined($STEP{"INTERPOLATED-LM_binarize"})) {
   `cp $exp_dir/lm/interpolated-binlm.$STEP{"INTERPOLATED-LM_binarize"} $dir/lm`;
@@ -96,9 +93,7 @@ my $config = "$exp_dir/tuning/moses.tuned.ini.".$STEP{"TUNING_apply-weights"};
 open(CONFIG,$config);
 open(OUT,">$dir/moses.tuned.ini.".$STEP{"TUNING_apply-weights"});
 while(<CONFIG>) {
-  s/moses.bin.ini.\d+.tables\/(reordering-table)/$1/;
   s/experiment\/..-..\/[^\/]+/engines\/$engine/g;
-  s/(reordering-table.+).gz/$1/;
   print OUT $_;
 }
 close(CONFIG);
