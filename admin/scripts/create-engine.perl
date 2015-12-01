@@ -78,10 +78,10 @@ if (defined($STEP{"TRAINING_build-biconcor"})) {
 #`cp -r $exp_dir/training/giza.$STEP{"TRAINING_run-giza"} $dir`;
 #`cp -r $exp_dir/training/giza-inverse.$STEP{"TRAINING_run-giza-inverse"} $dir`;
 #`cp -r $exp_dir/training/prepared.$STEP{"TRAINING_prepare-data"} $dir`;
-`cp -r $exp_dir/training/fast-align.$STEP{"TRAINING_fast-align-in-parts"} $dir`;
-`cp -r $exp_dir/training/fast-align.$STEP{"TRAINING_fast-align-in-parts"}.* $dir`;
-`cp -r $exp_dir/training/fast-align-inverse.$STEP{"TRAINING_fast-align-in-parts-inverse"} $dir`;
-`cp -r $exp_dir/training/fast-align-inverse.$STEP{"TRAINING_fast-align-in-parts-inverse"}.* $dir`;
+#`cp -r $exp_dir/training/fast-align.$STEP{"TRAINING_fast-align-in-parts"} $dir`;
+`cp $exp_dir/training/fast-align.$STEP{"TRAINING_fast-align-in-parts"}.* $dir`;
+#`cp -r $exp_dir/training/fast-align-inverse.$STEP{"TRAINING_fast-align-in-parts-inverse"} $dir`;
+`cp $exp_dir/training/fast-align-inverse.$STEP{"TRAINING_fast-align-in-parts-inverse"}.* $dir`;
 
 # copy truecase model
 if (defined($STEP{"TRUECASER_train"})) {
