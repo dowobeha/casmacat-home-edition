@@ -20,11 +20,21 @@ class catsettingsController extends viewcontroller {
           $cmd .= " -translationoptions ".($_POST["translationoptions"] ? 1 : 0); 
           $cmd .= " -allowchangevisualizationoptions ".($_POST["allowchangevisualizationoptions"] ? 1 : 0); 
           $cmd .= " -itpdraftonly ".($_POST["itpdraftonly"] ? 1 : 0); 
+          $cmd .= " -displayMouseAlign ".($_POST["displayMouseAlign"] ? 1 : 0); 
+          $cmd .= " -displayCaretAlign ".($_POST["displayCaretAlign"] ? 1 : 0); 
+          $cmd .= " -displayShadeOffTranslatedSource ".($_POST["displayShadeOffTranslatedSource"] ? 1 : 0); 
+          $cmd .= " -displayconfidences ".($_POST["displayconfidences"] ? 1 : 0); 
+          $cmd .= " -highlightValidated ".($_POST["highlightValidated"] ? 1 : 0); 
+          $cmd .= " -highlightPrefix ".($_POST["highlightPrefix"] ? 1 : 0); 
+          $cmd .= " -highlightSuffix ".($_POST["highlightSuffix"] ? 1 : 0); 
+          $cmd .= " -highlightLastValidated ".($_POST["highlightLastValidated"] ? 1 : 0); 
+          $cmd .= " -limitSuffixLength ".($_POST["limitSuffixLength"] ? 1 : 0); 
           exec($cmd);
           $this->msg = "Updated.";
         }
       }
     }
+
 
     public function setTemplateVars() {
       $current = file("/opt/casmacat/web-server/inc/config.ini");
@@ -53,9 +63,35 @@ class catsettingsController extends viewcontroller {
         if (preg_match("/itpdraftonly = (\d)/",$line,$match)) {
           $this->template->itpdraftonly = $match[1];
         }
+        if (preg_match("/displayMouseAlign = (\d)/",$line,$match)) {
+          $this->template->displayMouseAlign = $match[1];
+        }
+        if (preg_match("/displayCaretAlign = (\d)/",$line,$match)) {
+          $this->template->displayCaretAlign = $match[1];
+        }
+        if (preg_match("/displayShadeOffTranslatedSource = (\d)/",$line,$match)) {
+          $this->template->displayShadeOffTranslatedSource = $match[1];
+        }
+        if (preg_match("/displayconfidences = (\d)/",$line,$match)) {
+          $this->template->displayconfidences = $match[1];
+        }
+        if (preg_match("/highlightValidated = (\d)/",$line,$match)) {
+          $this->template->highlightValidated = $match[1];
+        }
+        if (preg_match("/highlightPrefix = (\d)/",$line,$match)) {
+          $this->template->highlightPrefix = $match[1];
+        }
+        if (preg_match("/highlightSuffix = (\d)/",$line,$match)) {
+          $this->template->highlightSuffix = $match[1];
+        }
+        if (preg_match("/highlightLastValidated = (\d)/",$line,$match)) {
+          $this->template->highlightLastValidated = $match[1];
+        }
+        if (preg_match("/limitSuffixLength = (\d)/",$line,$match)) {
+          $this->template->limitSuffixLength = $match[1];
+        }
       } 
       $this->template->msg = $this->msg;
     }
 }
-
 ?>

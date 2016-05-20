@@ -13,6 +13,16 @@ my $floatpredictions = 1;   # whether the ITP predictions should be displayed
 my $translationoptions = 0; # translation options
 my $allowchangevisualizationoptions = 1; # show a menu box for user to choose word level viz options
 my $itpdraftonly = 0;       # turn off ITP during revision
+#Visualization Preferences
+my $displayMouseAlign = 0;       # turn off ITP during revision
+my $displayCaretAlign = 0;
+my $displayShadeOffTranslatedSource = 0;
+my $displayconfidences = 0;
+my $highlightValidated = 0;
+my $highlightPrefix = 0;
+my $highlightSuffix = 0;
+my $highlightLastValidated = 0;
+my $limitSuffixLength = 0;
 
 my $HELP;
 $HELP = 1
@@ -23,7 +33,16 @@ $HELP = 1
                        'floatpredictions=i' => \$floatpredictions,
                        'translationoptions=i' => \$translationoptions,
                        'allowchangevisualizationoptions=i' => \$allowchangevisualizationoptions,
-                       'itpdraftonly=i' => \$itpdraftonly);
+                       'itpdraftonly=i' => \$itpdraftonly,
+                       'displayMouseAlign=i' => \$displayMouseAlign,
+                       'displayCaretAlign=i' => \$displayCaretAlign,
+                       'displayShadeOffTranslatedSource=i' => \$displayShadeOffTranslatedSource,
+                       'displayconfidences=i' => \$displayconfidences,
+                       'highlightValidated=i' => \$highlightValidated,
+                       'highlightPrefix=i' => \$highlightPrefix,
+                       'highlightSuffix=i' => \$highlightSuffix,
+                       'highlightLastValidated=i' => \$highlightLastValidated,
+                       'limitSuffixLength=i' => \$limitSuffixLength);
 
 my $inet_string = `/sbin/ifconfig | grep 'inet addr'`;
 my $host = "localhost";
@@ -97,6 +116,33 @@ while(<TEMPLATE>) {
   }
   elsif(/^itpdraftonly/) {
     print MINE "itpdraftonly = $itpdraftonly\n";
+  }
+  elsif(/^displayMouseAlign/) {
+    print MINE "displayMouseAlign = $displayMouseAlign\n";
+  }
+  elsif(/^displayCaretAlign/) {
+    print MINE "displayCaretAlign = $displayCaretAlign\n";
+  }
+  elsif(/^displayShadeOffTranslatedSource/) {
+    print MINE "displayShadeOffTranslatedSource = $displayShadeOffTranslatedSource\n";
+  }
+  elsif(/^displayconfidences/) {
+    print MINE "displayconfidences = $displayconfidences\n";
+  }
+  elsif(/^highlightValidated/) {
+    print MINE "highlightValidated = $highlightValidated\n";
+  }
+  elsif(/^highlightPrefix/) {
+    print MINE "highlightPrefix = $highlightPrefix\n";
+  }
+  elsif(/^highlightSuffix/) {
+    print MINE "highlightSuffix = $highlightSuffix\n";
+  }
+  elsif(/^highlightLastValidated/) {
+    print MINE "highlightLastValidated = $highlightLastValidated\n";
+  }
+  elsif(/^limitSuffixLength/) {
+    print MINE "limitSuffixLength = $limitSuffixLength\n";
   }
   else {
     print MINE $_;

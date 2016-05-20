@@ -1,4 +1,5 @@
 <?php include "/opt/casmacat/admin/lib/view/_header.html" ?>
+<script language="javascript" src="/lib/js/catsettings.js"></script>
 <h1>CAT Settings</h1>
 <p tal:content="msg"></p>
 <form method="post" action="/" enctype="multipart/form-data">
@@ -21,6 +22,27 @@
 <td><input type="checkbox" tal:attributes="checked allowchangevisualizationoptions" name="allowchangevisualizationoptions" value="1" /></td></tr>
 <tr><td>Restrict ITP to Draft Stage</td>
 <td><input type="checkbox" tal:attributes="checked itpdraftonly" name="itpdraftonly" value="1" /></td></tr>
+<tr><td id="visPrefsToggle" bgcolor="#999966">Show/Hide Visualization Preferences</td></tr>
+<tr><td><table id="visualizationPrefs" style="display: none;">
+    <tr><td>displayMouseAlign</td>
+    <td><input type="checkbox" tal:attributes="checked displayMouseAlign" name="displayMouseAlign" value="1" /></td></tr>
+    <tr><td>displayCaretAlign</td>
+    <td><input type="checkbox" tal:attributes="checked displayCaretAlign" name="displayCaretAlign" value="1" /></td></tr>
+    <tr><td>displayShadeOffTranslatedSource</td>
+    <td><input type="checkbox" tal:attributes="checked displayShadeOffTranslatedSource" name="displayShadeOffTranslatedSource" value="1" /></td></tr>
+    <tr><td>displayConfidences</td>
+    <td><input type="checkbox" tal:attributes="checked displayconfidences" name="displayconfidences" value="1" /></td></tr>
+    <tr><td>highlightValidated</td>
+    <td><input type="checkbox" tal:attributes="checked highlightValidated" name="highlightValidated" value="1" /></td></tr>
+    <tr><td>highlightPrefix</td>
+    <td><input type="checkbox" tal:attributes="checked highlightPrefix" name="highlightPrefix" value="1" /></td></tr>
+    <tr><td>highlightSuffix</td>
+    <td><input type="checkbox" tal:attributes="checked highlightSuffix" name="highlightSuffix" value="1" /></td></tr>
+    <tr><td>highlightLastValidated</td>
+    <td><input type="checkbox" tal:attributes="checked highlightLastValidated" name="highlightLastValidated" value="1" /></td></tr>
+    <tr><td>limitSuffixLength</td>
+    <td><input type="checkbox" tal:attributes="checked limitSuffixLength" name="limitSuffixLength" value="1" /></td></tr>
+</table></td></tr>
 <tr><td>&nbsp;</td><td><input type="submit" value="update"/></td></tr>
 </table>
 </form>
