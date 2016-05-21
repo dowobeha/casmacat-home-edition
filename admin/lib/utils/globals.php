@@ -22,11 +22,11 @@
   $ret = array();
   exec('/sbin/ifconfig',$ret);
   foreach($ret as $line) {
-    if (preg_match('/inet addr:(10\.\d+\.\d+\.\d+)/',$line,$match)) {
+    if (preg_match('/inet addr:(192\.\d+\.\d+\.\d+)/',$line,$match)) {
       $ip = $match[1];
     }elseif (preg_match('/inet addr:(172\.\d+\.\d+\.\d+)/',$line,$match)) {
       $ip = $match[1];
-    }elseif (preg_match('/inet addr:(192\.\d+\.\d+\.\d+)/',$line,$match)) {
+    }elseif (preg_match('/inet addr:(10\.\d+\.\d+\.\d+)/',$line,$match)) {
       $ip = $match[1];
     }
   }

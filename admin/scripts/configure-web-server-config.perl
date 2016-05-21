@@ -46,7 +46,7 @@ $HELP = 1
 
 my $inet_string = `/sbin/ifconfig | grep 'inet addr'`;
 my $host = "localhost";
-$host = $1 if ($inet_string =~ /inet addr:(10\.\d+\.\d+\.\d+)/ || $inet_string =~ /inet addr:(172\.\d+\.\d+\.\d+)/ || $inet_string =~ /inet addr:(192\.\d+\.\d+\.\d+)/);
+$host = $1 if ($inet_string =~ /inet addr:(192\.\d+\.\d+\.\d+)/ || $inet_string =~ /inet addr:(172\.\d+\.\d+\.\d+)/ || $inet_string =~ /inet addr:(10\.\d+\.\d+\.\d+)/);
 
 # get language info
 my ($source,$target) = ("","");;
