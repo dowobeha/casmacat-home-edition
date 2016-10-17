@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # installation of dependencies
 # this has to be run by root
@@ -7,7 +7,7 @@
 # mysql
 echo 'STEP 3/9: installing software for database '`date +%s`
 export DEBIAN_FRONTEND=noninteractive
-apt-get -yq install mysql-client-core-5.5
+apt-get -yq install mysql-client-core-5.7
 apt-get -yq install mysql-server
 
 # needed for cat server
@@ -23,7 +23,7 @@ pip install -U CherryPy socketIO-client
 # needed to compile
 echo 'STEP 6/9: installing c++ compiler '`date +%s`
 apt-get -yq install g++
-apt-get -yq install libboost-all-dev automake xmlrpc-api-utils libtool libzip-dev libbz2-dev libxmlrpc-c++8 libxmlrpc-c++8-dev libgoogle-perftools-dev libcmph-dev cmake
+apt-get -yq install libboost-all-dev automake xmlrpc-api-utils libtool libzip-dev libbz2-dev libxmlrpc-c++8v5 libxmlrpc-c++8-dev libgoogle-perftools-dev libcmph-dev cmake
 
 # dependencies of moses tools
 echo 'STEP 7/9: installing software for moses tools '`date +%s`
