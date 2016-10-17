@@ -11,10 +11,10 @@ apt-get -yq install git subversion
 # web server
 echo 'STEP 2/9: installing software for apache '`date +%s`
 apt-get -yq install apache2
-apt-get -yq install php5
-apt-get -yq install php5-json
-apt-get -yq install php5-mysql
-apt-get -yq install libapache2-mod-php5
+apt-get -yq install php7.0
+apt-get -yq install php7.0-json
+apt-get -yq install php7.0-mysql
+apt-get -yq install libapache2-mod-php7.0
 
 # needed to fullscreen firefox
 apt-get -yq install xdotool
