@@ -16,10 +16,11 @@ chown -R $user:$user /opt/casmacat
 bash ./setup-admin.sh > $LOGDIR/admin.out 2> $LOGDIR/admin.err &
 bash ./install-dependencies2.sh >> $LOGDIR/dependencies.out 2>> $LOGDIR/dependencies.err
 
+bash ./download-test-model.sh > $LOGDIR/test-model.out 2> $LOGDIR/test-model.err &
+
 if test "$INSTALL_MOSES" = "yes"; then 
   bash ./install-moses.sh > $LOGDIR/moses.out 2> $LOGDIR/moses.err &
   bash ./install-casmacat.sh > $LOGDIR/casmacat.out 2> $LOGDIR/casmacat.err &
-  bash ./download-test-model.sh > $LOGDIR/test-model.out 2> $LOGDIR/test-model.err &
 fi
 
 if test "$INSTALL_THOT" = "yes"; then 
