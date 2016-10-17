@@ -19,6 +19,7 @@ then
   cd /opt/moses/external/mgiza
   git pull
 else
+  mkdir -p /opt/moses/external
   cd /opt/moses/external
   git clone git://github.com/moses-smt/mgiza.git
 fi
