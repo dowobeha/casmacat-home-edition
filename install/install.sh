@@ -13,7 +13,7 @@ mkdir -p $LOGDIR
 
 sh ./install-dependencies.sh > $LOGDIR/dependencies.out 2> $LOGDIR/dependencies.err
 chown -R $user:$user /opt/casmacat
-sh ./setup-admin.sh > $LOGDIR/admin.out 2> $LOGDIR/admin.err &
+bash ./setup-admin.sh > $LOGDIR/admin.out 2> $LOGDIR/admin.err &
 sh ./install-dependencies2.sh >> $LOGDIR/dependencies.out 2>> $LOGDIR/dependencies.err
 
 if test "$INSTALL_MOSES" = "yes"; then 
