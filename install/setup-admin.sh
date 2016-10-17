@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $SUDO_USER ]; then user=$SUDO_USER; else user=`whoami`; fi
 
@@ -20,7 +20,7 @@ chown -R $user:$user /opt/casmacat
 echo 'STEP 2/2: restarting apache '`date +%s`
 service apache2 restart
 
-if [ $USER != $user ]
+if [[ "$USER" != "$user" && "$DISPLAY" != "" && "$(which firefox)" != "" ]];
 then
   killall -9 firefox
   firefox http://localhost/ &
